@@ -1,4 +1,13 @@
-module.exports = function getSeason(/* date */) {
-  throw 'Not implemented';
-  // remove line with error and write your code here
+module.exports = function getSeason(checkDate) {
+  if (typeof checkDate === 'undefined') {
+    return 'Unable to determine the time of year!'
+  }
+
+  if (Object.prototype.toString.call(checkDate) !== '[object Date]' || typeof checkDate.getMonth !== 'function' ) {
+    throw 'Error';
+  }
+
+
+  return true;
+
 };
