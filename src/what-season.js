@@ -9,11 +9,7 @@ module.exports = function getSeason(checkDate) {
     throw 'Error';
   }
 
-  let month = checkDate.getMonth() + 1;
+  let month = Number((checkDate.getMonth() + 1 + '').replace(/12/,'0'));
   
-  if (month === 12) {
-    month = 0;
-  }
-
   return SEASONS[Math.floor(month / 3)];
 };
