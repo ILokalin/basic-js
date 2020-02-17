@@ -1,4 +1,5 @@
 module.exports = function transform(workArray) {
+    
     const result = [];
 
     if (!Array.isArray(workArray)) {
@@ -6,7 +7,7 @@ module.exports = function transform(workArray) {
     }
     
     workArray.forEach((item, index, array) => {
-            if (workArray[index + 1] !== '--discard-prev' && !/^--/.test(item) && workArray[index - 1] !== '--discard-next') {
+            if (!/^--/.test(item) && workArray[index - 1] !== '--discard-next') {
                 result.push(item);
             } 
 
@@ -18,6 +19,9 @@ module.exports = function transform(workArray) {
                 result.push(workArray[index - 1]);
             }
 
+            if (item === '--discard-prev') {
+                result.pop();
+            }
     });
 
     return result;
