@@ -1,27 +1,26 @@
 module.exports = class DepthCalculator {
-
-    calculateDepth(checkArray) {
+    constructor () {
         let deepCount = [];
-        
+    }
 
-        const checkStage = (array, stage) => {
-            if (array.length === 0) {
-                deepCount.push(stage);
+    calculateDepth(checkArray, stage = 0) {
+            if (stage === 0) {
+                this.deepCount = [];
+                stage = 1;
+            }
+       
+            if (checkArray.length === 0) {
+                this.deepCount.push(stage);
             }
 
-            array.forEach(item => {
+            checkArray.forEach(item => {
                 if (Array.isArray(item)) {
-                    checkStage(item, stage + 1);
+                    this.calculateDepth(item, stage + 1);
                 } else {
-                    deepCount.push(stage);
+                    this.deepCount.push(stage);
                 }
             })
-  
-        }
 
-        checkStage(checkArray, 1);
-
-        return deepCount.sort((a, b) => a - b)[deepCount.length - 1];
-
+        return this.deepCount.sort((a, b) => a - b)[this.deepCount.length - 1];
     }
 };
