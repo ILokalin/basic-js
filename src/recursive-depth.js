@@ -1,6 +1,27 @@
 module.exports = class DepthCalculator {
-    calculateDepth(/* arr */) {
-        throw 'Not implemented';
-        // remove line with error and write your code here
+
+    calculateDepth(checkArray) {
+        let deepCount = [];
+        
+
+        const checkStage = (array, stage) => {
+            if (array.length === 0) {
+                deepCount.push(stage);
+            }
+
+            array.forEach(item => {
+                if (Array.isArray(item)) {
+                    checkStage(item, stage + 1);
+                } else {
+                    deepCount.push(stage);
+                }
+            })
+  
+        }
+
+        checkStage(checkArray, 1);
+
+        return deepCount.sort((a, b) => a - b)[deepCount.length - 1];
+
     }
 };
