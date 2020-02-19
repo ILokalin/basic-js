@@ -30,19 +30,31 @@ class VigenereCipheringMachine {
             } else {
                 encryptString += cryptChar;
             }
-            
         }
-        console.log(encryptString)
+
         return encryptString;
         
     }
 
     decrypt(string = '', key = '') {
-        
+        let decryptString = '',
+            keyCount = 0;
 
-            if (string === '' || key === '') {
+        if (string === '' || key === '') {
             throw 'Error';
         }
+
+        for (let i = 0, length = string.length; i < length; i++) {
+            let decryptChar = string[i];
+
+            if (/[A-Z]/.test(decryptChar)) {
+                decryptString += this.charFromCode((26 + this.codeFromChar(decryptChar) - this.codeFromChar(key[keyCount++ % key.length])) % 26);
+            } else {
+                decryptString += decryptChar;
+            }
+        }
+
+        return decryptString;
 
     }
 }
