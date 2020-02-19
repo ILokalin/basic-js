@@ -2,8 +2,6 @@ class VigenereCipheringMachine {
     constructor (directCoder = true) {
         this.direct = directCoder
 
-        this.codeFromChar = this.codeFromChar.bind(this);
-        this.charFromCode = this.charFromCode.bind(this);
     }
 
     charFromCode(code) {
@@ -21,16 +19,29 @@ class VigenereCipheringMachine {
         if (string === '' || key === '') {
             throw 'Error';
         }
-       
-        for (let i = 0, length = string.length; i < length; i++) {
-            let cryptChar = string[i];
 
+        const encryptChar = (cryptChar) => {
             if (/[A-Za-z]/.test(cryptChar)) {
                 encryptString += this.charFromCode((this.codeFromChar(cryptChar) +  this.codeFromChar(key[keyCount++ % key.length])) % 26);
             } else {
                 encryptString += cryptChar;
             }
         }
+       
+        if (this.direct) {
+            for (let i = 0, length = string.length; i < length; i++) {
+                let cryptChar = string[i];
+            
+                encryptChar(cryptChar);
+            }
+        } else {
+            for (let i = string.length -1; i >= 0; i--) {
+                let cryptChar = string[i];
+            
+                encryptChar(cryptChar);
+            }
+        }
+        
 
         return encryptString;
         
@@ -44,13 +55,25 @@ class VigenereCipheringMachine {
             throw 'Error';
         }
 
-        for (let i = 0, length = string.length; i < length; i++) {
-            let decryptChar = string[i];
-
-            if (/[A-Z]/.test(decryptChar)) {
-                decryptString += this.charFromCode((26 + this.codeFromChar(decryptChar) - this.codeFromChar(key[keyCount++ % key.length])) % 26);
+        const decryptChar = (cryptChar) => {
+            if (/[A-Z]/.test(cryptChar)) {
+                decryptString += this.charFromCode((26 + this.codeFromChar(cryptChar) - this.codeFromChar(key[keyCount++ % key.length])) % 26);
             } else {
-                decryptString += decryptChar;
+                decryptString += cryptChar;
+            }
+        }
+
+        if (this.direct) {
+            for (let i = 0, length = string.length; i < length; i++) {
+                let cryptChar = string[i];
+
+                decryptChar(cryptChar);
+            }
+        } else {
+            for (let i = string.length - 1; i >= 0 ; i--) {
+                let cryptChar = string[i];
+
+                decryptChar(cryptChar);
             }
         }
 
