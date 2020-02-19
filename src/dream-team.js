@@ -4,10 +4,6 @@ module.exports = function createDreamTeam(members = []) {
     return false;
   } 
 
-  if (members.length === 0) {
-    throw 'Not implemented';
-  }
-
   let teamSecretName = [];
 
   members.forEach(name => {
