@@ -1,6 +1,13 @@
 # BasicJS
+[![Build Status](https://travis-ci.com/ILokalin/basic-js.svg?branch=master)](https://travis-ci.com/ILokalin/basic-js)
 
-⚠️ DO NOT SUBMIT PULL REQUESTS TO THIS REPO ⚠️
+- [x] Dream team
+- [x] What season
+- [x] Tower of Hanoi
+- [x] Transform array
+- [x] Chain maker
+- [x] Extended repeater
+- [x] Vigenere cipher
 
 ## General task description
 Your task is to write several functions that are the solution to the subtasks. Subtasks descriptions, as well as instructions on how to run tests and submit solutions are below.
