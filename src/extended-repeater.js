@@ -1,22 +1,30 @@
-module.exports = function repeater(str, options) {
-    const {addition = '', additionRepeatTimes = 1, additionSeparator = '|'} = options
-    const additionStrSet = [];
+const   DEFAULT_SEPARATOR     = '+',
+        DEFAULT_REPEATE_TIMES = 1,
+        DEFAULT_ADDITIONAL_SEPARATOR = '|',
+        DEFAULT_ADDITIONAL_STRING    = '',
+        DEFAULT_ADDITIONAL_REPEATE_TIMES = 1;
 
-    if (addition !== '') {
-        for (let i = 0; i < additionRepeatTimes; i++) {
-            additionStrSet.push(String(addition))
-        }
+module.exports = function repeater(reciveString, options) {
+    const {
+        repeatTimes = DEFAULT_REPEATE_TIMES, 
+        separator   = DEFAULT_SEPARATOR,
+        addition    = DEFAULT_ADDITIONAL_STRING, 
+        additionRepeatTimes = DEFAULT_ADDITIONAL_REPEATE_TIMES, 
+        additionSeparator   = DEFAULT_ADDITIONAL_SEPARATOR } = options;
+
+    const additionStringSet = [],
+          reciveStringSet = [];
+
+    for (let i = 0; i < additionRepeatTimes; i++) {
+        additionStringSet.push(String(addition))
     }
 
-    let additionStrString = additionStrSet.join(additionSeparator);
-
-    const {repeatTimes = 1, separator = '+'} = options;
-    let strSet = [];
+    let compliteAdditionString = additionStringSet.join(additionSeparator);
 
     for (let i = 0; i < repeatTimes; i++) {
-        strSet.push(String(str) + additionStrString);
+        reciveStringSet.push(String(reciveString) + compliteAdditionString);
     }
 
-    return strSet.join(separator);
+    return reciveStringSet.join(separator);
 };
   
