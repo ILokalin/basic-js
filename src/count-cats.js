@@ -1,6 +1,8 @@
+const CAT = '^^';
+
 module.exports = function countCats(room) {
   
-  return room.reduce((summ, current, index, array) => {
-    return summ + array[index].filter(item => item === '^^').length;
+  return room.reduce((sum, current, index) => {
+    return sum + room[ index ].filter(item => item === CAT).length;
   }, 0);
 };
